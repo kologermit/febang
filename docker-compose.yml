@@ -1,18 +1,18 @@
 version: "3.9"
 services:
-  # database:
-  #   image: "postgres:13-alpine"
-  #   restart: on-failure
-  #   environment:
-  #     - "POSTGRES_USER=GameMaster"
-  #     - "POSTGRES_PASSWORD=SuperSecretPassword"
-  #     - "POSTGRES_DB=febang"
-  #     - "PGDATA=/var/lib/postgresql/data/pgdata"
-  #   volumes:
-  #     - "./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql"
-  #     - "./db/postgres:/var/lib/postgresql/data"
-  #   networks:
-  #     - main
+  database:
+    image: "postgres:13-alpine"
+    restart: on-failure
+    environment:
+      - "POSTGRES_USER=gamemaster"
+      - "POSTGRES_PASSWORD=SuperSecretPassword"
+      - "POSTGRES_DB=febang"
+      - "PGDATA=/var/lib/postgresql/data/pgdata"
+    volumes:
+      - "./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql"
+      - "./db/postgres:/var/lib/postgresql/data"
+    networks:
+      - api_database
 
   # api_go:
   #   build: ./api_go
@@ -20,15 +20,18 @@ services:
   #   depends_on:
   #     - database
   #   networks:
-  #     - main
+  #     - api_database
+  #     - nginx_api
 
   frontend_react:
     build: ./frontend_react
     volumes:
       - "./frontend_react/src:/app/src"
       - "./frontend_react/public:/app/public"
+    # depends_on:
+      # - api_go
     networks:
-      - main
+      - nginx_frontend
 
   nginx:
     image: nginx:latest
@@ -41,13 +44,19 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - frontend_react
-    #   - database
-    #   - api_go
     networks:
-      - main
+      - nginx_frontend
+      - nginx_api
+    depends_on:
+      - database
+      # - api_go
+      - frontend_react
+
 
 networks:
-  main:
+  nginx_frontend:
+    driver: bridge
+  nginx_api:
+    driver: bridge
+  api_database:
     driver: bridge
