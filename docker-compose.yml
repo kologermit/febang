@@ -1,34 +1,32 @@
 version: "3.9"
 services:
-  database:
-    image: "postgres:13-alpine"
-    restart: on-failure
-    environment:
-      - "POSTGRES_USER=GameMaster"
-      - "POSTGRES_PASSWORD=SuperSecretPassword"
-      - "POSTGRES_DB=febang"
-      - "PGDATA=/var/lib/postgresql/data/pgdata"
-    volumes:
-      - "./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql"
-      - "./db/postgres:/var/lib/postgresql/data"
-    networks:
-      - main
+  # database:
+  #   image: "postgres:13-alpine"
+  #   restart: on-failure
+  #   environment:
+  #     - "POSTGRES_USER=GameMaster"
+  #     - "POSTGRES_PASSWORD=SuperSecretPassword"
+  #     - "POSTGRES_DB=febang"
+  #     - "PGDATA=/var/lib/postgresql/data/pgdata"
+  #   volumes:
+  #     - "./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql"
+  #     - "./db/postgres:/var/lib/postgresql/data"
+  #   networks:
+  #     - main
 
-  api_go:
-    build: ./api_go
-    restart: on-failure
-    depends_on:
-      - database
-    networks:
-      - main
+  # api_go:
+  #   build: ./api_go
+  #   restart: on-failure
+  #   depends_on:
+  #     - database
+  #   networks:
+  #     - main
 
   frontend_react:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: ./frontend_react
     volumes:
-      - "./react-frontend/src:/app/src"
-      - "./react-frontend/public:/app/public"
+      - "./frontend_react/src:/app/src"
+      - "./frontend_react/public:/app/public"
     ports:
       - "3000:3000"
     networks:
@@ -45,9 +43,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - database
-      - api_go
+    # depends_on:
+    #   - database
+    #   - api_go
     networks:
       - main
 
