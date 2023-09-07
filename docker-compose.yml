@@ -27,8 +27,6 @@ services:
     volumes:
       - "./frontend_react/src:/app/src"
       - "./frontend_react/public:/app/public"
-    ports:
-      - "3000:3000"
     networks:
       - main
 
@@ -43,7 +41,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    # depends_on:
+    depends_on:
+      - frontend_react
     #   - database
     #   - api_go
     networks:
