@@ -22,6 +22,18 @@ services:
     networks:
       - main
 
+  frontend_react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./react-frontend/src:/app/src"
+      - "./react-frontend/public:/app/public"
+    ports:
+      - "3000:3000"
+    networks:
+      - main
+
   nginx:
     image: nginx:latest
     restart: on-failure
