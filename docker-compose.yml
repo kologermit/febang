@@ -1,10 +1,10 @@
 version: "3.9"
 services:
   database:
-    image: "postgres:${POSTGRES_VERSION:-13-alpine}"
+    image: "postgres:13-alpine"
     restart: on-failure
     environment:
-      - "POSTGRES_USER=gameMaster"
+      - "POSTGRES_USER=GameMaster"
       - "POSTGRES_PASSWORD=SuperSecretPassword"
       - "POSTGRES_DB=febang"
       - "PGDATA=/var/lib/postgresql/data/pgdata"
