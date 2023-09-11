@@ -14,22 +14,24 @@ services:
     networks:
       - api_database
 
-  # api_go:
-  #   build: ./api_go
-  #   restart: on-failure
-  #   depends_on:
-  #     - database
-  #   networks:
-  #     - api_database
-  #     - nginx_api
+  api_php:
+    image: php:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - "./api_php:/src"
+    working_dir: "/src/public"
+    entrypoint: ["php", "-S", "0.0.0.0:8080"]
+    networks:
+      - nginx_api
 
   frontend_react:
     build: ./frontend_react
     volumes:
       - "./frontend_react/src:/app/src"
       - "./frontend_react/public:/app/public"
-    # depends_on:
-      # - api_go
+    depends_on:
+      - api_php
     networks:
       - nginx_frontend
 
@@ -49,7 +51,7 @@ services:
       - nginx_api
     depends_on:
       - database
-      # - api_go
+      - api_php
       - frontend_react
 
 
