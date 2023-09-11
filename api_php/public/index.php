@@ -9,5 +9,6 @@
 	Доступные функции:
 	<p><a href="square-roots.php">Вычисление корней</a></p>
 	<p><a href="triangle-angles.php">Вычисление углов треутольника</a></p>
+	<p><a href="triangle-area.php">Вычисление площади треутольника</a></p>
 </body>
 </html>
