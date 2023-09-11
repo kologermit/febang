@@ -3,9 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Php</title>
+	<title>UDSU KOLOGERMIT PHP LEARNING</title>
 </head>
 <body>
-	PHP
+	Доступные функции:
+	<p><a href="square-roots.php">Вычисление корней</a></p>
+	<p><a href="triangle-angles.php">Вычисление углов треутольника</a></p>
 </body>
 </html>
