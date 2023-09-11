@@ -17,6 +17,6 @@
 		echo JSONReturn("Found 1 root", [-$b / 2 / $a], "SUCCESS");
 		exit;
 	}
-	echo JSONReturn("Found 2 roots", [(-$b - sqrt($d)) / 2 / $a, (-$b + sqrt($d)) / 2 / $a], 200);
+	echo JSONReturn("Found 2 roots", ["roots" => [(-$b - sqrt($d)) / 2 / $a, (-$b + sqrt($d)) / 2 / $a]], 200);
 	exit;
 ?>

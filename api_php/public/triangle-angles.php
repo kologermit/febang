@@ -17,9 +17,9 @@
 	$a = sqrt(sqr($x1-$x2) + sqr($y1-$y2));
 	$b = sqrt(sqr($x1-$x3) + sqr($y1-$y3));
 	$c = sqrt(sqr($x3-$x2) + sqr($y3-$y2));
-	echo JSONReturn("Angels was found", [
+	echo JSONReturn("Angels were found", ["angels" => [
 		acos(($a*$a + $c*$c -$b*$b) / (2*$a*$c)) * 180 / pi(),
 		acos(($a*$a + $b*$b -$c*$c) / (2*$a*$b)) * 180 / pi(),
-		acos(($b*$b + $c*$c -$a*$a) / (2*$b*$c)) * 180 / pi()], 
+		acos(($b*$b + $c*$c -$a*$a) / (2*$b*$c)) * 180 / pi()]], 
 	"SUCCESS");
 ?>

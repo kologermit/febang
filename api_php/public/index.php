@@ -10,5 +10,6 @@
 	<p><a href="square-roots.php">Вычисление корней</a></p>
 	<p><a href="triangle-angles.php">Вычисление углов треутольника</a></p>
 	<p><a href="triangle-area.php">Вычисление площади треутольника</a></p>
+	<p><a href="triangle-sides.php">Вычисление сторон треутольника</a></p>
 </body>
 </html>

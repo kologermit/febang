@@ -17,8 +17,5 @@
 	$a = sqrt(sqr($x1-$x2) + sqr($y1-$y2));
 	$b = sqrt(sqr($x1-$x3) + sqr($y1-$y3));
 	$c = sqrt(sqr($x3-$x2) + sqr($y3-$y2));
-	$cos_angle = ($a*$a + $c*$c -$b*$b) / (2*$a*$c);
-	$sin_angle = sqrt(1 - sqr($cos_angle));
-	$area = $sin_angle * $a * $c / 2;
-	echo JSONReturn("Area was found", ["area" => $area], "SUCCESS");
+	echo JSONReturn("Sides was found", ["sides" => [$a, $b, $b]], "SUCCESS");
 ?>
