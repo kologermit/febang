@@ -16,8 +16,6 @@ services:
 
   api_php:
     image: php:latest
-    ports:
-      - 8080:8080
     volumes:
       - "./api_php:/src"
     working_dir: "/src/public"
@@ -45,7 +43,6 @@ services:
       - "./nginx/mime.type:/etc/nginx/mime.type"
     ports:
       - "80:80"
-      - "443:443"
     networks:
       - nginx_frontend
       - nginx_api
