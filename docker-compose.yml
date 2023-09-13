@@ -14,17 +14,15 @@ services:
     networks:
       - api_database
 
-  api_php:
-    image: php:latest
+  api_go:
+    build: ./api_go
     volumes:
-      - "./api_php:/src"
-    working_dir: "/src/public"
-    entrypoint: ["php", "-S", "0.0.0.0:8080"]
+      - "./api_go:/code"
     depends_on:
       - database
     networks:
       - nginx_api
-      - moderarion_api
+      - moderation_api
       - api_database
 
   frontend_react:
@@ -34,26 +32,26 @@ services:
       - "./frontend_react/public:/app/public"
     depends_on:
       - database
-      - api_php
+      - api_go
     environment:
       - "PORT=80"
     networks:
       - nginx_frontend
 
-  moderation:
-    build: ./moderation
+  moderation_django:
+    build: ./moderation_django
     volumes:
-      - "./moderation:/code"
-    depends_on:
+      - "./moderation_django:/code"
+    depends_on: 
       - database
-      - api_php
+      - api_go
     networks:
       - nginx_moderation
-      - modeartion_api
+      - moderation_api
 
   nginx:
-    image: nginx:latest
-    restart: on-failure
+    image: nginx:alpine
+    restart: always
     volumes:
       - "./nginx/src/:/etc/nginx/src/"
       - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
@@ -67,10 +65,9 @@ services:
       - nginx_moderation
     depends_on:
       - database
-      - api_php
+      - api_go
       - frontend_react
-      - moderation
-
+      - moderation_django
 
 networks:
   nginx_frontend:
