@@ -9,7 +9,7 @@ services:
       - "POSTGRES_DB=febang"
       - "PGDATA=/var/lib/postgresql/data/pgdata"
     volumes:
-      - "./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql"
+      - "./initial_database.sql:/docker-entrypoint-initdb.d/initial_database.sql"
       - "./db/postgres:/var/lib/postgresql/data"
     networks:
       - api_database
@@ -20,8 +20,12 @@ services:
       - "./api_php:/src"
     working_dir: "/src/public"
     entrypoint: ["php", "-S", "0.0.0.0:8080"]
+    depends_on:
+      - database
     networks:
       - nginx_api
+      - moderarion_api
+      - api_database
 
   frontend_react:
     build: ./frontend_react
@@ -29,9 +33,23 @@ services:
       - "./frontend_react/src:/app/src"
       - "./frontend_react/public:/app/public"
     depends_on:
+      - database
       - api_php
+    environment:
+      - "PORT=80"
     networks:
       - nginx_frontend
+
+  moderation:
+    build: ./moderation
+    volumes:
+      - "./moderation:/code"
+    depends_on:
+      - database
+      - api_php
+    networks:
+      - nginx_moderation
+      - modeartion_api
 
   nginx:
     image: nginx:latest
@@ -46,16 +64,22 @@ services:
     networks:
       - nginx_frontend
       - nginx_api
+      - nginx_moderation
     depends_on:
       - database
       - api_php
       - frontend_react
+      - moderation
 
 
 networks:
   nginx_frontend:
     driver: bridge
   nginx_api:
+    driver: bridge
+  nginx_moderation:
+    driver: bridge
+  moderation_api:
     driver: bridge
   api_database:
     driver: bridge
