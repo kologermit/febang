@@ -1,6 +1,6 @@
 module kologermit/febang
 
-go 1.20
+go 1.19
 
 require github.com/gofiber/fiber/v2 v2.49.1
 

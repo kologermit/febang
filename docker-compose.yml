@@ -1,12 +1,12 @@
 version: "3.9"
 services:
   database:
-    image: "postgres:13-alpine"
+    image: "postgres:${PGVERSION:-13-alpine}"
     restart: on-failure
     environment:
-      - "POSTGRES_USER=gamemaster"
-      - "POSTGRES_PASSWORD=SuperSecretPassword"
-      - "POSTGRES_DB=febang"
+      - "POSTGRES_USER=${POSTGRES_USER:-gamemaster}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-SuperSecretPassword}"
+      - "POSTGRES_DB=${POSTGRES_DB:-febang}"
       - "PGDATA=/var/lib/postgresql/data/pgdata"
     volumes:
       - "./initial_database.sql:/docker-entrypoint-initdb.d/initial_database.sql"
@@ -53,12 +53,12 @@ services:
     image: nginx:alpine
     restart: always
     volumes:
-      - "./nginx/src/:/etc/nginx/src/"
-      - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./frontend_react/build/:/etc/nginx/src/"
+      - "./nginx/nginx_${FRONTEND_BUILD:-debug}.conf:/etc/nginx/nginx.conf:ro"
       - "./nginx/ssl/:/etc/ssl/"
       - "./nginx/mime.type:/etc/nginx/mime.type"
     ports:
-      - "80:80"
+      - "${NGINX_EXTERNAL_PORT:-80}:80"
     networks:
       - nginx_frontend
       - nginx_api
