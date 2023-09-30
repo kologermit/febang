@@ -1,13 +1,9 @@
-FROM node:14-alpine
+FROM node:latest
 
-WORKDIR /app
-
-COPY package.json ./
-
-COPY yarn.lock ./
+WORKDIR /code
 
 RUN yarn install --frozen-lockfile
 
-COPY . .
+EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD if [ -e ./build/robots.txt ]; then echo "Build already created"; else npm run build; fi

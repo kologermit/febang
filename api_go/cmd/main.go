@@ -1,13 +1,13 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+    "github.com/kologermit/febang"
+    "log"
+)
 
 func main() {
-    app := fiber.New()
-
-    app.Get("/", func(c *fiber.Ctx) error {
-        return c.SendString("Hello, Kologermit :)!")
-    })
-
-    app.Listen(":8080")
+    srv := new(febang.Server);
+    if err := srv.Run("8000"); err != nil {
+        log.Fatalf("Error while running server: %s", err.Error());
+    }
 }

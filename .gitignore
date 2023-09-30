@@ -7,7 +7,9 @@
 *.dll
 *.so
 *.dylib
-
+*.exe
+ssl
+*lock*
 # Test binary, built with `go test -c`
 *.test
 
@@ -22,3 +24,6 @@ go.work
 *sublime*
 db
 .env
+*.sqlite*
+*__init__*
+*__pychace__
