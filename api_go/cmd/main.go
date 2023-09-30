@@ -7,7 +7,7 @@ import (
 
 func main() {
     srv := new(febang.Server);
-    if err := srv.Run("8000"); err != nil {
+    if err := srv.Run("8080"); err != nil {
         log.Fatalf("Error while running server: %s", err.Error());
     }
 }

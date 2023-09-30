@@ -1,39 +1,27 @@
 # Febang
-
 Febang это настольная браузерная игра на основе настолькой игры Bang
-
-## Установка
-
-Для запуска проекта понадобится установить [Docker](https://docs.docker.com/engine/install/) и дополнение [Docker Compose](https://docs.docker.com/compose/install/linux/)
-
-Далее нужно запустить Docker и в папке проекта запустить сборку проекта
-
+## Требуемые программы
+[Docker](https://docs.docker.com/engine/install/) и дополнение [Docker Compose](https://docs.docker.com/compose/install/linux/)
+## Запуск проекта
+Все команды нужно запускать в терминале в корневой папке проекта и при запущенном Docker Desktop
+### Сборка
+```bash
+docker compose build
+```
+### Запуск собранного проекта
 ```bash
 docker compose up -d
 ```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+### Перезапуск проекта
+```bash
+docker compose restart
 ```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+### Остановка запущенного проекта
+```bash
+docker compose stop
+```
+## Использование проекта
+Проект содержит 3 векти, а именно:
+1. Основной [сайт](http://localhost) (http://localhost)
+2. Сайт [модерации](http://localhost/moderation/) (http://localhost/moderation/)
+3. [АПИ](http://localhost/api/doc/) (http://localhost/api/doc/)
