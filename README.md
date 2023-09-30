@@ -29,4 +29,4 @@ docker compose stop
 <img src="./started-project.jpg">
 Так выглядит запущенный сервер
 
-<a href="https://vk.com/kologermit/"><img src="./vk.png" width="30" height="30" /></a><a href="https://t.me/kologermit/"><img src="https://fulindirim.files.wordpress.com/2021/02/1613661192851.png" width="30" height="30" /></a><a href="https://github.com/kologermit/"><img src="./github.png" width="30" height="30" /></a>
+<a href="https://vk.com/kologermit/"><img src="./vk.png" width="30" height="30" /></a><a href="https://t.me/kologermit/"><img src="./telegram.png" width="30" height="30" /></a><a href="https://github.com/kologermit/"><img src="./github.png" width="30" height="30" /></a>
